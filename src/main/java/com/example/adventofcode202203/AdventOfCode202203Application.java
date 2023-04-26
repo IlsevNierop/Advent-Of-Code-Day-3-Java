@@ -50,24 +50,14 @@ public class AdventOfCode202203Application {
 
         int score2 = 0;
         for (int i = 0; i < itemsInBackPack.size(); i += 3) {
-            int shortestLength = 1000000;
             List<String> threeBackPacks = Arrays.asList(itemsInBackPack.get(i), itemsInBackPack.get(i + 1), itemsInBackPack.get(i + 2));
-            List<String> threeBackPacksSortedByLength = new ArrayList<>();
-            //create list waarbij de kortste string als eerste komt, zodat je door die characters kunt loopen en zeker weten dat je niks mist.
-            for (String s : threeBackPacks) {
-                if (s.length() < shortestLength) {
-                    shortestLength = s.length();
-                    threeBackPacksSortedByLength.add(0, s);
-                } else {
-                    threeBackPacksSortedByLength.add(s);
-                }
-            }
-            for (int j = 0; j < shortestLength; j++) {
-                if (threeBackPacksSortedByLength.get(1).contains(Character.toString(threeBackPacksSortedByLength.get(0).charAt(j)))) {
+
+            for (int j = 0; j < threeBackPacks.get(0).length(); j++) {
+                if (threeBackPacks.get(1).contains(Character.toString(threeBackPacks.get(0).charAt(j)))) {
                     // If contains then check if next string also contains
-                    if (threeBackPacksSortedByLength.get(2).contains(Character.toString(threeBackPacksSortedByLength.get(0).charAt(j)))) {
+                    if (threeBackPacks.get(2).contains(Character.toString(threeBackPacks.get(0).charAt(j)))) {
                         //if next string also contains that char, calculate the priority number and add it to score2
-                        score2 += priorityScoreChar(threeBackPacksSortedByLength.get(0).charAt(j));
+                        score2 += priorityScoreChar(threeBackPacks.get(0).charAt(j));
                         break;
                     }
                 }
